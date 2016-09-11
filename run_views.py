@@ -1,6 +1,6 @@
 from flask import Flask
 app = Flask(__name__)
-app.secret_key = 'longliveakita'
+app.secret_key = 'your-hard-to-guess-secret-key'
 
 # HTML methods
 from flask import request, render_template, redirect, url_for
