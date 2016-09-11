@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+{% block body %}
+    <div id="wrapper">
+        <form action=" " method="POST" onkeyup="validate()" name="submit">
+                {{ form.hidden_tag() }}
+        <div id="boxA">
+            <h3>Annual event probabilities</h3>         
+            <h3>Drug A</h3>   
+            <p>
+            {{ form.pMIlte50_A.label(id="label1") }} {{ form.pMIlte50_A(size=5, class="inputs", id="probMIlte50_A") }}
+            </p>                  
+            <p>&nbsp</p>
+            <p>
+            {{ form.pMIgt50_A.label(id="label2") }} {{ form.pMIgt50_A(size=5, class="inputs", id="probMIgt50_A") }}
+            </p>
+            <p>&nbsp</p>
+            <p>
+            {{ form.pDeathMI_A.label(id="label3") }} {{ form.pDeathMI_A(size=5, class="inputs", id="probDeathMI_A") }} 
+            </p>
+            <p>&nbsp</p>
+            <p>
+            {{ form.pStroke_A.label(id="label4") }} {{ form.pStroke_A(size=5, class="inputs", id="probStroke_A") }} 
+            </p>
+            <p>&nbsp</p>
+            <p>
+            {{ form.pDthStrk_A.label(id="label5") }} {{ form.pDthStrk_A(size=5, class="inputs", id="probDeathStroke_A") }} 
+            </p>
+            <p>&nbsp</p>
+            <h3>Costs</h3>
+            <p>
+            {{ form.MI_cost.label(id="label6") }} {{ form.MI_cost(size=5, class="inpt_cost", id="MI_cost") }} 
+            </p>                  
+            <p>&nbsp</p>
+            <p>
+            {{ form.Stroke_cost.label(id="label7") }} {{ form.Stroke_cost(size=5, class="inpt_cost", id="stroke_cost") }} 
+            </p>                  
+            <p>&nbsp</p>
+            <p>
+            {{ form.DrugA_cost.label(id="label8") }} {{ form.DrugA_cost(size=5, class="inpt_cost", id="drugA_cost") }} 
+            </p>                  
+            <p>&nbsp</p>
+            <p>
+            {{ form.DrugB_cost.label(id="label9") }} {{ form.DrugB_cost(size=5, class="inpt_cost", id="drugB_cost") }} 
+            </p> 
+            <p>&nbsp</p>
+            <p>
+            <input type="submit" value="Run"> 
+            <a href="{{ url_for('submit') }}"><button type="button">Reset</button></a>
+            </p>                
+        </div>
+        <div id="boxB">
+            <h3>&nbsp</h3>
+            <h3>Drug B</h3>
+                <p>
+                {{ form.pMIlte50_B.label(id="label10") }} {{ form.pMIlte50_B(size=5, class="inputs", id="probMIlte50_B") }} 
+                </p>                  
+                <p>&nbsp</p>
+                <p>
+                {{ form.pMIgt50_B.label(id="label11") }} {{ form.pMIgt50_B(size=5, class="inputs", id="probMIgt50_B") }}
+                </p>
+                <p>&nbsp</p>
+                <p>
+                {{ form.pDeathMI_B.label(id="label12") }} {{ form.pDeathMI_B(size=5, class="inputs", id="probDeathMI_B") }} 
+                </p>
+                <p>&nbsp</p>
+                <p>
+                {{ form.pStroke_B.label(id="label13") }} {{ form.pStroke_B(size=5, class="inputs", id="probStroke_B" ) }} 
+                </p>
+                <p>&nbsp</p>
+                <p>
+                {{ form.pDthStrk_B.label(id="label14") }} {{ form.pDthStrk_B(size=5, class="inputs", id="probDeathStroke_B") }} 
+                </p>
+                <p>&nbsp</p>
+                <h3>Other parameters</h3>
+                <p>
+                {{ form.MI_util.label(id="label15") }} {{ form.MI_util(size=5, class="inputs", id="MI_util") }} 
+                </p>                  
+                <p>&nbsp</p>
+                <p>
+                {{ form.Stroke_util.label(id="label16") }} {{ form.Stroke_util(size=5, class="inputs", id="Stroke_util") }} 
+                </p>                  
+                <p>&nbsp</p>
+                <p>
+                {{ form.Discount.label(id="label17") }} {{ form.Discount(size=5, class="inputs", id="discount") }} 
+                </p>      
+        </div>
+        </form>
+        <div id="boxC">
+            <h2>Results</h2>
+              <table class="rtable">
+              <thead>
+              <tr>
+                <th>Drug</th>
+                <th>Mean Cost</th>
+                <th>QALYs</td>
+                <th>C/E Ratio</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>A</td>
+                <td>{{ costA }}</td>
+                <td>{{ qalyA }}</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>{{ costB }}</td>
+                <td>{{ qalyB }}</td>
+              <td>--</td>
+              </tr>
+              <tr>
+                <td>A-B</td>
+                <td>{{ costDiff }}</td>
+                <td>{{ qalyDiff }}</td>
+                <td>{{ ceratio }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div id="graph">
+                <h2>
+                {{ bar.render()|safe}}
+                </h2>
+            </div>        
+        </div>
+        <p id="message1">Enter value between 0 and 1 for event probabilities and utilities</p>
+        <p id="message2">Enter value greater than 0 for costs</p>
+        </div>
+        <script type="text/javascript"> validate(); </script>
+        <script>
+         $(document).ready(function() {
+         
+         function create_tooltip(idvar, contentvar, idlabel) {
+            $( idvar ).tooltip({
+            items: idvar,
+            position: { my: "left center", at: "right+15 center+25"},
+		    content: contentvar,
+            open: function(event, ui)
+            { 
+                var $id = $(ui.tooltip).attr('id');
+                // close any lingering tooltips
+                $('div.ui-tooltip').not('#' + $id).remove();
+        
+                $(idlabel).css('color', '#66b3ff');
+            },
+            close: function(event, ui)
+            {
+                ui.tooltip.hover(function()
+                {
+                    $(this).stop(true).fadeTo(400, 1); 
+                    $(idlabel).css('color', '#66b3ff');
+                    
+                },
+                function()
+                {
+                    //$(idlabel).css('color', '#99CCFF');
+                    //$(this).fadeOut('400', function()
+                    //{
+                        $(this).remove();
+                        $(idlabel).css('color', 'black');
+                    //});
+                });
+                $(idlabel).css('color', 'black');
+             }
+            });
+         }
+         
+         function content_template(tipheader, tiplabel, tipdesc, srcimg, link, source, defval) {
+            var contentvar = '<div class="divtiptop"><div class="tipheader">' + tipheader + 
+               '</div><div class="tiplabel">' + tiplabel + '</div></div><p>' + tipdesc + 
+               "</p><img class='tipimg' " + srcimg + '>' +
+               '<div class="divtipbottom"><div class="tipsrc"><a id="srclink" href= " ' + link + ' ">' + 
+               source + '</a></div><div class="tipdefault">' + defval + '</div></div>'
+               ;
+            return contentvar;
+         }
+         
+         function content_template_noimg(tipheader, tiplabel, tipdesc, link, source, defval) {
+            var contentvar = '<div class="divtiptop"><div class="tipheader">' + tipheader + 
+               '</div><div class="tiplabel">' + tiplabel + '</div></div><p>' + tipdesc + 
+               '<div class="divtipbottom"><div class="tipsrc"><a id="srclink" href= " ' + link + ' ">' + 
+               source + '</a></div><div class="tipdefault">' + defval + '</div></div>'
+               ;
+            return contentvar;
+         }
+         
+         //probMIlte50_A MI less than or equal to 50 tooltip vars
+         
+         var tipheader1 = "MI (age&le;50)";
+         var tiplabel1 = "Drug A";
+         var tipdesc1 = "Annual probability of MI (patients &le; 50 years old)";
+         var srcimg1 = ' src="{{ url_for('static', filename='tree_MI.svg') }}" ';
+         var link1 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source1 = "Source: Stokes et al. JMCP 2012";
+         var defval1 = "Default = 0.20";
+                  
+         create_tooltip("#probMIlte50_A", content_template(tipheader1, tiplabel1, tipdesc1, srcimg1, link1, source1, defval1), "#label1");
+         
+         //probMIlte50_B MI less than or equal to 50 tooltip vars
+         create_tooltip("#probMIlte50_B", content_template(tipheader1, "Drug B", tipdesc1, srcimg1, link1, source1, "Default = 0.30"), "#label10");
+         
+         //probMIgt50_A MI greater than or equal to 50 tooltip vars
+         
+         var tipheader2 = "MI (age>50)";
+         var tiplabel2 = "Drug A";
+         var tipdesc2 = "Annual probability of MI (patients > 50 years old)";
+         var srcimg2 =  ' src="{{ url_for('static', filename='tree_MI.svg') }}" ';
+         var link2 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source2 = "Source: Stokes et al. JMCP 2012";
+         var defval2 = "Default = 0.26";
+         
+         create_tooltip("#probMIgt50_A", content_template(tipheader2, tiplabel2, tipdesc2, srcimg2, link2, source2, defval2), "#label2");
+         //probMIgt50_B MI greater than or equal to 50 tooltip vars
+         create_tooltip("#probMIgt50_B", content_template(tipheader2, "Drug B", tipdesc2, srcimg2, link2, source2, "Default = 0.30"), "#label11");
+          
+         //probDeathMI_A Death following MI tooltip vars
+         
+         var tipheader3 = "Death after MI";
+         var tiplabel3 = "Drug A";
+         var tipdesc3 = "Annual probability of death following an MI";
+         var srcimg3 = ' src="{{ url_for('static', filename='tree_MI_death.svg') }}" ';
+         var link3 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source3 = "Source: Stokes et al. JMCP 2012";
+         var defval3 = "Default = 0.40";
+         
+         create_tooltip("#probDeathMI_A", content_template(tipheader3, tiplabel3, tipdesc3, srcimg3, link3, source3, defval3), "#label3");
+         //probDeathMI_B Death following MI tooltip vars
+         create_tooltip("#probDeathMI_B", content_template(tipheader3, "Drug B", tipdesc3, srcimg3, link3, source3, "Default = 0.40"), "#label12");
+         
+         
+         //probStroke_A Stroke following MI tooltip vars
+         
+         var tipheader4 = "Stroke";
+         var tiplabel4 = "Drug A";
+         var tipdesc4 = "Annual probability of stroke";
+         var srcimg4 = ' src="{{ url_for('static', filename='tree_stroke.svg') }}" ';
+         var link4 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source4 = "Source: Stokes et al. JMCP 2012";
+         var defval4 = "Default = 0.15";
+         
+         create_tooltip("#probStroke_A", content_template(tipheader4, tiplabel4, tipdesc4, srcimg4, link4, source4, defval4), "#label4");
+         //probStroke_B Stroke following MI tooltip vars
+         create_tooltip("#probStroke_B", content_template(tipheader4, "Drug B", tipdesc4, srcimg4, link4, source4, "Default = 0.18"), "#label13");
+        
+         
+         //probDeathStroke_A Death after stroke tooltip vars
+         
+         var tipheader5 = "Death after Stroke";
+         var tiplabel5 = "Drug A";
+         var tipdesc5 = "Annual probability of death following a stroke";
+         var srcimg5 = ' src="{{ url_for('static', filename='tree_stroke_death.svg') }}" ';
+         var link5 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source5 = "Source: Stokes et al. JMCP 2012";
+         var defval5 = "Default = 0.30";
+         
+         create_tooltip("#probDeathStroke_A", content_template(tipheader5, tiplabel5, tipdesc5, srcimg5, link5, source5, defval5), "#label5");
+         //probDeathStroke_B Death after stroke tooltip vars
+         create_tooltip("#probDeathStroke_B", content_template(tipheader5, "Drug B", tipdesc5, srcimg5, link5, source5, "Default = 0.30"), "#label14");
+       
+         
+         // mi event costs tooltip vars
+         
+         var tipheader6 = "MI event";
+         var tiplabel6 = "Costs";
+         var tipdesc6 = "Cost (in $) of treating a MI";
+         var srcimg6 = ' src="{{ url_for('static', filename='tree_MI_alive.svg') }}" ';
+         var link6 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source6 = "Source: Stokes et al. JMCP 2012";
+         var defval6 = "Default = 1000"; 
+         
+         create_tooltip("#MI_cost", content_template(tipheader6, tiplabel6, tipdesc6, srcimg6, link6, source6, defval6), "#label6");
+          
+         // stroke event costs tooltip vars
+         var tipheader7 = "Stroke event";
+         var tiplabel7 = "Costs";
+         var tipdesc7 = "Cost (in $) of treating a stroke ";
+         var srcimg7 = ' src="{{ url_for('static', filename='tree_stroke_alive.svg') }}" ';
+         var link7 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source7 = "Source: Stokes et al. JMCP 2012";
+         var defval7 = "Default = 4500"; 
+         
+         create_tooltip("#stroke_cost", content_template(tipheader7, tiplabel7, tipdesc7, srcimg7, link7, source7, defval7), "#label7");
+                   
+         // drugA_cost Cost of drug A tooltip vars
+         var tipheader8 = "Drug A";
+         var tiplabel8 = "Costs";
+         var tipdesc8 = "Daily cost (in $) of treatment with Drug A";
+         var srcimg8 = ' src="{{ url_for('static', filename='tree_costs.svg') }}" ';
+         var link8 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source8 = "Source: Stokes et al. JMCP 2012";
+         var defval8 = "Default = 6"; 
+         
+         create_tooltip("#drugA_cost", content_template(tipheader8, tiplabel8, tipdesc8, srcimg8, link8, source8, defval8), "#label8");
+          
+         // drugB_cost Cost of drug B tooltip vars
+         
+         var tipheader9 = "Drug B";
+         var tiplabel9 = "Costs";
+         var tipdesc9 = "Daily cost (in $) of treatment with Drug B";
+         var srcimg9 = ' src="{{ url_for('static', filename='tree_costs.svg') }}" ';
+         var link9 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source9 = "Source: Stokes et al. JMCP 2012";
+         var defval9 = "Default = 3";
+         
+         create_tooltip("#drugB_cost", content_template(tipheader9, tiplabel9, tipdesc9, srcimg9, link9, source9, defval9), "#label9");
+                      
+         // MI_util Utility associated with MI tooltip vars
+         var tipheader15 = "Utility MI";
+         var tiplabel15 = "Other parameters";
+         var tipdesc15 = "Utility associated with surviving an MI";
+         var srcimg15 = ' src="{{ url_for('static', filename='tree_MI_alive.svg') }}" ';
+         var link15 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source15 = "Source: Stokes et al. JMCP 2012";
+         var defval15 = "Default = 0.70";
+         
+         create_tooltip("#MI_util", content_template(tipheader15, tiplabel15, tipdesc15, srcimg15, link15, source15, defval15), "#label15");
+         
+         // Stroke_util Utility associated with stroke tooltip vars
+         var tipheader16 = "Utility MI";
+         var tiplabel16 = "Other parameters";
+         var tipdesc16 = "Utility associated with surviving a stroke";
+         var srcimg16 = ' src="{{ url_for('static', filename='tree_stroke_alive.svg') }}" ';
+         var link16 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source16 = "Source: Stokes et al. JMCP 2012";
+         var defval16 = "Default = 0.50";
+         
+         create_tooltip("#Stroke_util", content_template(tipheader16, tiplabel16, tipdesc16, srcimg16, link16, source16, defval16), "#label16");
+             
+         // Discount discount rate for costs
+         var tipheader17 = "Discount rate";
+         var tiplabel17 = "Other parameters";
+         var tipdesc17 = "Discount rate applied to costs and QALYs occurring beyond year 1 for adjustment " + 
+                         "to present values";
+         
+         var link17 = "http://www.jmcp.org/doi/pdf/10.18553/jmcp.2009.15.8.669";
+         var source17 = "Source: Assumption";
+         var defval17 = "Default = 0.03";
+         
+         create_tooltip("#discount", content_template_noimg(tipheader17, tiplabel17, tipdesc17, link17, source17, defval17), "#label17");
+                   
+        } );
+        </script>
+{% endblock %}
