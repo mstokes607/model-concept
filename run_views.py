@@ -141,7 +141,7 @@ def submit():
                                                                                             cost_vars)                                                                                       
             bar = Markovcalcs.chart()
         
-            return render_template('hello_rev.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
+            return render_template('model.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
                                    costDiff=costDiff, qalyA=qalyA, qalyB=qalyB, qalyDiff=qalyDiff, 
                                    ceratio=ceratio, bar=bar)
             
@@ -172,7 +172,7 @@ def submit():
 
             bar = Markovcalcs.chart()
              
-            return render_template('hello_rev.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
+            return render_template('model.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
                                    costDiff=costDiff, qalyA=qalyA, qalyB=qalyB, qalyDiff=qalyDiff, 
                                    ceratio=ceratio, bar=bar)
                                    
@@ -185,6 +185,6 @@ def submit():
                                                                                             
     bar = Markovcalcs.chart()
         
-    return render_template('hello_rev.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
+    return render_template('model.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
                                    costDiff=costDiff, qalyA=qalyA, qalyB=qalyB, qalyDiff=qalyDiff, 
                                    ceratio=ceratio, bar=bar)                              
