@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block body %}
+  <h2>Overview of Structure</h2>
+    <div id = "structwrapper"> 
+      <div id = "description">
+        <div id = "intro">In common with previous studies, the cardiovascular disease (CVD) model has 5 disease states: 
+          Healthy, Myocardial infarction (MI), Stroke, CVD death, and death due to other causes. 
+        A Markov model is used to calculate the proportion of patients in each of the 
+        disease states during each yearly cycle for each treatment of interest (Drug A vs. Drug B) 
+        as well as costs and utilities associated with each state.
+        </div>  
+        <br>
+        <div id = "caption1" class="captions">
+        All patients begin in the Healthy state.
+        </div>
+        <br>
+        <div id = "caption" class="captions">
+        Patients are at risk for subsequent CVD events including MI and stroke.
+        </div>
+        <br>
+        <div id = "caption2" class="captions">
+        Patients who experience either an MI or stroke are at risk of dying due to CVD.
+        </div>
+        <br>
+        <div id = "caption3" class="captions">
+        Patients may also die from other (non-CVD) causes.
+        </div>
+        <br>
+        <div id = "caption4" class="captions">
+        Patients may experience different events and transition between MI, Stroke and Healthy states prior to death. 
+        </div>
+        <br>
+        <div>
+        Go to the <a id="linkmodel" href="{{ url_for('submit') }}">Model</a> page to view results and interact with the data.
+        </div>  
+      </div>
+      <div id = "structure">
+        <img class="slides" id = "slide1" src="{{ url_for('static', filename='structure_alt_1.png') }}"> 
+        <img class="slides" src="{{ url_for('static', filename='structure_alt_2.png') }}"> 
+        <img class="slides" src="{{ url_for('static', filename='structure_alt_3.png') }}">   
+        <img class="slides" src="{{ url_for('static', filename='structure_alt_4.png') }}"> 
+        <div id = "dot_wrapper">
+          <span class="dot" id = "dot1" onclick = "showSlides(1)"></span> 
+          <span class="dot" onclick = "showSlides(2)"></span> 
+          <span class="dot" onclick = "showSlides(3)"></span> 
+          <span class="dot" onclick = "showSlides(4)"></span>
+        </div> 
+      </div>    
+    </div>
+    <script type="text/javascript">
+      var slideIndex = 0;
+      var captionIndex = 0;
+       
+      autoSlides();
+      autoCaptions(); 
+
+      function autoSlides() {
+        var i;
+        var slides = document.getElementsByClassName("slides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none"; 
+        }
+        slideIndex++;
+        if (slideIndex <= slides.length) {
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].style.backgroundColor = "#20B2AA"; 
+          setTimeout(autoSlides, 3000);
+          }
+        else {
+          slides[3].style.display = "block";
+        }
+      }
+      
+      function autoCaptions() {
+        var i;
+        var captions = document.getElementsByClassName("captions"); 
+        captionIndex++;
+        if (captionIndex>captions.length-1) {
+            captions[3].style.color="black";
+        }
+        else {
+          captions[captionIndex-1].style.color = "#20B2AA"; // Set to teal
+          if (captionIndex == 1) {captions[captions.length-1].style.color="black";}
+          else {captions[captionIndex-2].style.color="black";}
+          setTimeout(autoCaptions, 3000); 
+        }
+      }
+
+  </script>
+
+{% endblock %}
