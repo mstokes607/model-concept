@@ -1,0 +1,160 @@
+/* h1    { font-family: "Arial"; color: #20B2AA; border-bottom: 2px solid #eee; margin-left:10px; margin-bottom: 1px;} */
+h2    { font-family: "Arial"; color: #20B2AA; margin-left:16px} 
+h3    { font-family: "Arial"; color: #20B2AA; font-size: 16px; margin-left:16px;} 
+p { font-family: "Arial"; font-size: 14px;}
+p[id="message1"] { font-family: "Arial"; font-size: 12px; margin-left: 16px; margin-top: 5px;}
+p[id="message2"] { font-family: "Arial"; font-size: 12px; margin-left: 16px; margin-top: 0px;}
+
+/* #menu {color: #20B2AA; float:right; margin-right:800px;} */
+#container {width:1000px; height:40px; margin-top:0px; margin-left:16px; border-bottom: 2px solid #eee;} 
+#banner {width: 30%; height: 100%; float: left; color: #20B2AA; font-family: "Arial"; font-size: 36px; }
+#menu {width: 70%; height: 40%; float: left; margin-top:20px; font-size: 14px; font-family: "Arial";}
+       
+ul.linklist {list-style-type: none; margin: 0; padding: 0;}
+li.linklist {display: inline; margin-right: 7px;}
+li.linklist a {color: #20B2AA;}
+li.linklist a:link {text-decoration: none;}
+li.linklist a:hover {color: #808080;}
+
+*:focus {outline: none;}
+
+label {float:left; width:120px; margin-left:16px; margin-top:1px;}
+input[type="text"] {float:left; font-size: 12px; margin-left:10px; text-align: center;}
+button {float:left; margin-left:25px; width: 75px; height: 20px;}
+input[type=submit] {float:left; margin-left:16px; width: 75px; height: 20px;}
+
+input[type=submit], button {background-color: #696969; 
+                    color: white; font-weight: bold;
+                    text-align: center; text-shadow: 0 -1px 0 #396715;
+                    background: -webkit-gradient(linear, left top, left bottom, from(#696969), to(#696969));
+                    background: -webkit-linear-gradient(top, #696969, #696969);
+                    background: -moz-linear-gradient(top, #696969, #696969);
+                    background: -ms-linear-gradient(top, #696969, #696969);
+                    background: -o-linear-gradient(top, #696969, #696969);
+                    background: linear-gradient(top, #696969, #696969);
+                    border: 1px solid #696969;
+                    border-bottom: 1px solid #696969;
+                    border-radius: 3px;
+                    -webkit-border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    -ms-border-radius: 3px;
+                    -o-border-radius: 3px;
+                    box-shadow: inset 0 1px 0 0 #696969;
+                    -webkit-box-shadow: 0 1px 0 0 #696969 inset ;
+                    -moz-box-shadow: 0 1px 0 0 #696969 inset;
+                    -ms-box-shadow: 0 1px 0 0 #696969 inset;
+                    -o-box-shadow: 0 1px 0 0 #696969 inset;}
+
+button:active {border: 1px solid #696969;box-shadow: 0 0 10px 5px #696969 inset; 
+                          -webkit-box-shadow:0 0 10px 5px #696969 inset ;
+                          -moz-box-shadow: 0 0 10px 5px #696969 inset;
+                          -ms-box-shadow: 0 0 10px 5px #696969 inset;
+                          -o-box-shadow: 0 0 10px 5px #696969 inset;}
+input[type=submit]:hover, button:hover {opacity:.85;} 
+input[type=submit]:active {border: 1px solid #696969;box-shadow: 0 0 10px 5px #696969 inset; 
+                          -webkit-box-shadow:0 0 10px 5px #696969 inset ;
+                          -moz-box-shadow: 0 0 10px 5px #696969 inset;
+                          -ms-box-shadow: 0 0 10px 5px #696969 inset;
+                          -o-box-shadow: 0 0 10px 5px #696969 inset;}                      
+                                              
+div {display: block}
+#wrapper {width: 1000px; height: 850px;} 
+#boxA {width:25%; height: 50%; float:left;}
+#boxB {width:25%; height: 50%; float:left;}
+#boxC {width:50%; height: 50%; float:left;}
+#graph {width: 343px; height: 300px; margin-top: 10px;}  
+
+table {display: inline-block; vertical-align: top; max-width: 100%;  
+       overflow-x: auto; white-space: nowrap; border-collapse: collapse;
+       border-spacing: 0; margin-left: 16px;} 
+       
+th {font-family: "Arial"; color: #20B2AA; font-size: 16px; text-align: left;}
+
+th, td {padding: 6px 12px; border: 1px solid #d9d7ce;}
+
+td {font-family: "Arial"; font-size: 14px; text-align: center;}
+
+/* tooltips model page elements */
+.ui-tooltip {
+    background: #20B2AA;
+    border: 1px solid gray;
+    position: absolute; /* needed so tooltips don't run into each other */
+  }
+  
+.ui-tooltip {
+    padding: 15px 15px;
+    color: white;
+    border-radius: 20px;
+    width: 335px;
+    font: 14px "Arial", Sans-Serif;
+    box-shadow: 0 0 3px gray;
+  }
+
+
+.divtiptop {width: 335px; height: 21px; border-bottom: 1px solid white;}
+
+.tipheader { 
+  font: bold 16px "Arial", Sans-Serif;
+  /* width: 75%; */
+  display:inline-block;
+  float: left;
+  color: #99CCFF;
+}
+
+.tipimg {height: 194px; width: 301px; }
+
+.tiplabel {font-style: italic; /* width: 25%; */ display:inline-block; float: right;}
+
+.divtipbottom {width: 335px; height: 16px; margin-top: 10px;}
+
+.tipsrc {
+  font-style: italic; 
+  /* width:75%; */
+  float: left;
+}
+
+a {color: white;}
+
+.tipdefault {
+  font-style: italic;
+  /* width:25%; */
+  float: right;
+}
+
+/* overview page elements */
+#structwrapper {width: 1000px; height: 400px; margin-left:16px;}
+#structure {width: 60%; float:left;}
+#description {width: 40%; float:left; font-family: "Arial"; font-size: 16px;}
+
+/* image */
+.slides {margin-left: 32px; display: none;}
+
+#slide1 {display: block;}
+
+/* captions */
+.captions {font-family: "Arial"; font-size: 16px; color: black;}
+
+#caption1 {color: #20B2AA;} 
+
+/* slideshow dots */
+
+#dot_wrapper {margin-left: 227px; margin-top: 15px;}
+
+.dot {
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  margin-left: 8px;
+}
+
+#dot1 {background-color:#20B2AA;}
+
+#linkmodel {color: #20B2AA;}
+
+/* about page elements */
+.abouttxt {width: 750px; font-family: "Arial"; font-size: 16 px; margin-left:16px;}
+ul.aboutlist {padding: 0; margin: 16px;  }
