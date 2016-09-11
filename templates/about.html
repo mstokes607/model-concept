@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>About the Application</h2>
+    <div class = "abouttxt">
+    The Model Concept application was developed to experiment with a web-based approach
+    to health economic modeling. The data presented represents a simple Markov model designed to show-case some of
+    the benefits of using a web based design. Some of these include:
+    <ul class="aboutlist"> 
+    <li>Ability to share structure and results more easily and to potentially larger audiences</li><br>
+    <li>Advantages associated with use of various html elements (e.g., tooltips and links) to more fully integrate
+    the data source documentation with model structure and user modifiable data inputs</li><br>
+    <li>Capacity to use the web as a portal to provide/collect feedback on design and assumptions more directly compared
+    with excel based designs</li>
+    </ul>
+    </div> 
+    <h2>About Markov Models</h2>
+    <div class = "abouttxt">
+    Markov models are used to represent stochastic processes and are
+    frequently used in health economic evaluations, usually to model chronic diseases. In a Markov 
+    model, the disease under study is divided into distinct states with transition probabilities used to 
+    describe the likelihood of moving from one state to the next over a fixed period of time (usually 6-month
+    or 1-year periods). Long term outcomes and costs associated with a disease can then be estimated by attaching
+    unit costs and health effects to states in the model and running the model over a large number of cycles. 
+    </div>
+{% endblock %}
