@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+ <title>{{ title }}</title>
+ <script type="text/javascript" src="{{ url_for('static', filename='control.js') }}"></script>
+ <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+ <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div id="container">
+ <div id="banner">Model Concept</div>
+    <div id="menu">
+        <ul class="linklist">
+            <li class="linklist"><a href="{{ url_for('submit') }}">Model</a></li>
+            <li class="linklist"><a href="{{ url_for('overview') }}">Overview</a></li>
+            <li class="linklist"><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    
+    </div>
+</div>
+{% block body %}{% endblock %}
+</body>
+</html>
