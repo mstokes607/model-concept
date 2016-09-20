@@ -21,14 +21,14 @@ function validate() {
             msg.style.color = "red";
             }
             // isNaN(num[i])
-        else if (num[i] > 1 | num[i] <= 0) {
+        else if (num[i] > 1 | num[i] < 0) {
             val[i].style.border = "1px solid red";
             //val[i].focus();
             val[i].style.backgroundColor = "#FBB0B0";
             val[i].style.border = "1px solid red";
             msg.style.color = "red";
         }
-        else if (num[i] <= 1 & num[i] > 0) {
+        else if (num[i] <= 1 & num[i] >= 0) {
             noerrcnt += 1;
             val[i].style.backgroundColor = "white";
             val[i].style.border = "1px solid #e6e6e6";
@@ -41,11 +41,14 @@ function validate() {
     //validation for cost inputs
     var cst = document.getElementsByClassName("inpt_cost");
     var cst_num = [];
+    var costpatt = /\s/;
+    var detect = [];
     var i; 
     for (i = 0; i < cst.length; i++) {
         cst_num[i] = parseFloat(cst[i].value);
+        detect[i] = costpatt.test(cst[i].value);
     
-        if (cst[i].value == "") {
+        if (cst[i].value == "" | detect[i]) {
             cst[i].style.border = "1px solid red";
             //cst[i].focus();
             cst[i].style.backgroundColor = "#FBB0B0";
@@ -70,7 +73,7 @@ function validate() {
         }
         
     }
-    //alert(noerrcnt2);
 }
 
 validate();
+    
