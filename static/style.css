@@ -1,11 +1,9 @@
-/* h1    { font-family: "Arial"; color: #20B2AA; border-bottom: 2px solid #eee; margin-left:10px; margin-bottom: 1px;} */
 h2    { font-family: "Arial"; color: #20B2AA; margin-left:16px} 
 h3    { font-family: "Arial"; color: #20B2AA; font-size: 16px; margin-left:16px;} 
 p { font-family: "Arial"; font-size: 14px;}
-p[id="message1"] { font-family: "Arial"; font-size: 12px; margin-left: 16px; margin-top: 5px;}
-p[id="message2"] { font-family: "Arial"; font-size: 12px; margin-left: 16px; margin-top: 0px;}
 
-/* #menu {color: #20B2AA; float:right; margin-right:800px;} */
+/* site banner and navigational menu */
+
 #container {width:1000px; height:40px; margin-top:0px; margin-left:16px; border-bottom: 2px solid #eee;} 
 #banner {width: 30%; height: 100%; float: left; color: #20B2AA; font-family: "Arial"; font-size: 36px; }
 #menu {width: 70%; height: 40%; float: left; margin-top:20px; font-size: 14px; font-family: "Arial";}
@@ -16,49 +14,35 @@ li.linklist a {color: #20B2AA;}
 li.linklist a:link {text-decoration: none;}
 li.linklist a:hover {color: #808080;}
 
+/* footer elements */
+
+#footer {width: 1000px; margin-bottom: 1000px; margin-left:16px; text-align: left; color: gray; font-size: 12px;}
+#footerlink {color: #20B2AA;}
+
+/* input header and messages elements */
+
+#inputwrapper {width: 500px; height: 50px;}
+#inputheader {width: 22%; height: 50px; float: left;}
+div.messages {width: 78%; height: 50px; float: left;}
+#message1 { font-family: "Arial"; font-size: 12px; float: left; margin-top: 28px;}
+#message2 { font-family: "Arial"; font-size: 12px; float: left; margin-top: 28px;}
+
 *:focus {outline: none;}
 
+/* form inputs model page elements */
+
 label {float:left; width:120px; margin-left:16px; margin-top:1px;}
-input[type="text"] {float:left; font-size: 12px; margin-left:10px; text-align: center;}
-button {float:left; margin-left:25px; width: 75px; height: 20px;}
-input[type=submit] {float:left; margin-left:16px; width: 75px; height: 20px;}
+input[type="text"] {float:left; font-size: 13px; margin-left:10px; text-align: center; border: 1px solid #e6e6e6;}
+button {margin-left:25px; width: 75px; height: 40px;}
+input[type=submit] {margin-left:16px; width: 75px; height: 40px;}
 
-input[type=submit], button {background-color: #696969; 
-                    color: white; font-weight: bold;
-                    text-align: center; text-shadow: 0 -1px 0 #396715;
-                    background: -webkit-gradient(linear, left top, left bottom, from(#696969), to(#696969));
-                    background: -webkit-linear-gradient(top, #696969, #696969);
-                    background: -moz-linear-gradient(top, #696969, #696969);
-                    background: -ms-linear-gradient(top, #696969, #696969);
-                    background: -o-linear-gradient(top, #696969, #696969);
-                    background: linear-gradient(top, #696969, #696969);
-                    border: 1px solid #696969;
-                    border-bottom: 1px solid #696969;
-                    border-radius: 3px;
-                    -webkit-border-radius: 3px;
-                    -moz-border-radius: 3px;
-                    -ms-border-radius: 3px;
-                    -o-border-radius: 3px;
-                    box-shadow: inset 0 1px 0 0 #696969;
-                    -webkit-box-shadow: 0 1px 0 0 #696969 inset ;
-                    -moz-box-shadow: 0 1px 0 0 #696969 inset;
-                    -ms-box-shadow: 0 1px 0 0 #696969 inset;
-                    -o-box-shadow: 0 1px 0 0 #696969 inset;}
-
-button:active {border: 1px solid #696969;box-shadow: 0 0 10px 5px #696969 inset; 
-                          -webkit-box-shadow:0 0 10px 5px #696969 inset ;
-                          -moz-box-shadow: 0 0 10px 5px #696969 inset;
-                          -ms-box-shadow: 0 0 10px 5px #696969 inset;
-                          -o-box-shadow: 0 0 10px 5px #696969 inset;}
-input[type=submit]:hover, button:hover {opacity:.85;} 
-input[type=submit]:active {border: 1px solid #696969;box-shadow: 0 0 10px 5px #696969 inset; 
-                          -webkit-box-shadow:0 0 10px 5px #696969 inset ;
-                          -moz-box-shadow: 0 0 10px 5px #696969 inset;
-                          -ms-box-shadow: 0 0 10px 5px #696969 inset;
-                          -o-box-shadow: 0 0 10px 5px #696969 inset;}                      
+input[type=submit], button {color: #20B2AA; font-size: 14px; text-align: center; border: 1px solid #20B2AA; border-radius: 3px;
+                    background-color: white; margin-top: 20px; float: left;}
+                    
+input[type=submit]:hover, button:hover {background-color: #d4f7f6; cursor: pointer; cursor: hand; }                  
                                               
 div {display: block}
-#wrapper {width: 1000px; height: 850px;} 
+#wrapper {width: 1000px; height: 520px;} 
 #boxA {width:25%; height: 50%; float:left;}
 #boxB {width:25%; height: 50%; float:left;}
 #boxC {width:50%; height: 50%; float:left;}
@@ -75,37 +59,70 @@ th, td {padding: 6px 12px; border: 1px solid #d9d7ce;}
 td {font-family: "Arial"; font-size: 14px; text-align: center;}
 
 /* tooltips model page elements */
-.ui-tooltip {
+
+.ui-tooltip, .arrow:after {
     background: #20B2AA;
     border: 1px solid gray;
     position: absolute; /* needed so tooltips don't run into each other */
   }
   
 .ui-tooltip {
-    padding: 15px 15px;
+    padding: 10px 10px;
     color: white;
     border-radius: 20px;
-    width: 335px;
-    font: 14px "Arial", Sans-Serif;
+    width: 189px;
+    font: 12px "Arial", Sans-Serif;
     box-shadow: 0 0 3px gray;
   }
+  
+.ui-tooltip-content::after {
+    top: 18px;
+    left: -10px;
+    border-color: transparent #666;
+    border-width: 10px 10px 10px 0;
+}
 
+.arrow {
+   width: 25px;
+   height: 25px;
+   overflow: hidden;
+   position: absolute;
+   top: 37%; /* Change vertical position */
+   margin-left: -9px; /* Change horizontal position */
+   bottom: -30px;
+   left: -16px;
+  }
+  
+.arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
-.divtiptop {width: 335px; height: 21px; border-bottom: 1px solid white;}
+.divtiptop {width: 175px; height: 21px; border-bottom: 1px solid white;}
 
 .tipheader { 
-  font: bold 16px "Arial", Sans-Serif;
+  font: bold 12px "Arial", Sans-Serif;
   /* width: 75%; */
   display:inline-block;
   float: left;
   color: #99CCFF;
 }
 
+.descript {font: 12px "Arial", Sans-Serif; margin-top: 5px; }
+
 .tipimg {height: 194px; width: 301px; }
 
 .tiplabel {font-style: italic; /* width: 25%; */ display:inline-block; float: right;}
 
-.divtipbottom {width: 335px; height: 16px; margin-top: 10px;}
+.divtipbottom {width: 189px; height: 16px; margin-top: 10px;}
 
 .tipsrc {
   font-style: italic; 
@@ -113,7 +130,7 @@ td {font-family: "Arial"; font-size: 14px; text-align: center;}
   float: left;
 }
 
-a {color: white;}
+#srclink {color: white;}
 
 .tipdefault {
   font-style: italic;
@@ -122,7 +139,7 @@ a {color: white;}
 }
 
 /* overview page elements */
-#structwrapper {width: 1000px; height: 400px; margin-left:16px;}
+#structwrapper {width: 1000px; height: 450px; margin-left:16px; margin-bottom: 20px;}
 #structure {width: 60%; float:left;}
 #description {width: 40%; float:left; font-family: "Arial"; font-size: 16px;}
 
@@ -156,5 +173,11 @@ a {color: white;}
 #linkmodel {color: #20B2AA;}
 
 /* about page elements */
-.abouttxt {width: 750px; font-family: "Arial"; font-size: 16 px; margin-left:16px;}
+
+.abouttxt {width: 750px; font-family: "Arial"; font-size: 16 px; margin-left:16px; margin-bottom: 20px;}
 ul.aboutlist {padding: 0; margin: 16px;  }
+
+
+
+
+
