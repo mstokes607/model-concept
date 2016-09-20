@@ -11,26 +11,44 @@ def calc_trans(pMIlte50, pMIgt50, pDeathMI, pStroke, pDthStrk):
     OtherDthGt50 = 0.16
     #Transition probabilities for <=50
     P_AliveLte50 = (1-OtherDthLte50) * (1-(pMIlte50 + pStroke))
+    
+    #Fix division by 0 if pMI = 0 and pStroke = 0 for MI < 50 yrs transition probs
+    if (pMIlte50 + pStroke) > 0:
+        percentMIlte50 = pMIlte50 / (pMIlte50+pStroke)
+        percentStrokelte50 = pStroke / (pMIlte50+pStroke)
+    else: 
+        percentMIlte50 = 0
+        percentStrokelte50 = 0
+    
     P_MILte50 = ((1-OtherDthLte50) * (pMIlte50 + pStroke) * 
-                (pMIlte50 / (pMIlte50+pStroke)) * (1-pDeathMI))
+                percentMIlte50 * (1-pDeathMI))
     P_StrokeLte50 = ((1-OtherDthLte50) * (pMIlte50 + pStroke) * 
-                (pStroke / (pMIlte50+pStroke)) * (1-pDthStrk))
+                percentStrokelte50 * (1-pDthStrk))
     P_OthDthLte50 = OtherDthLte50
     P_FatalMILte50 = ((1-OtherDthLte50) * (pMIlte50 + pStroke) * 
-                (pMIlte50 / (pMIlte50+pStroke)) * (pDeathMI))
+                percentMIlte50 * (pDeathMI))
     P_FatalStrkLte50 = ((1-OtherDthLte50) * (pMIlte50 + pStroke) * 
-                (pStroke / (pMIlte50+pStroke)) * (pDthStrk))
+                percentStrokelte50 * (pDthStrk))
     #Transition probabilities for >50
+    
+    #Fix division by 0 if pMI = 0 and pStroke = 0 for MI > 50 transition probs
+    if (pMIgt50 + pStroke) > 0:
+        percentMIgt50 = pMIgt50 / (pMIgt50+pStroke)
+        percentStrokegt50 = pStroke / (pMIgt50+pStroke)
+    else: 
+        percentMIgt50 = 0
+        percentStrokegt50 = 0
+        
     P_AliveGt50 = (1-OtherDthGt50) * (1-(pMIgt50 + pStroke))
     P_MIGt50 = ((1-OtherDthGt50) * (pMIgt50 + pStroke) * 
-                (pMIgt50 / (pMIgt50+pStroke)) * (1-pDeathMI))
+                percentMIgt50 * (1-pDeathMI))
     P_StrokeGt50 = ((1-OtherDthGt50) * (pMIgt50 + pStroke) * 
-                (pStroke / (pMIgt50+pStroke)) * (1-pDthStrk))
+                percentStrokegt50 * (1-pDthStrk))
     P_OthDthGt50 = OtherDthGt50
     P_FatalMIGt50 = ((1-OtherDthGt50) * (pMIgt50 + pStroke) * 
-                (pMIgt50 / (pMIgt50+pStroke)) * (pDeathMI))
+                percentMIgt50 * (pDeathMI))
     P_FatalStrkGt50 = ((1-OtherDthGt50) * (pMIgt50 + pStroke) * 
-                (pStroke / (pMIgt50+pStroke)) * (pDthStrk))
+                percentStrokegt50 * (pDthStrk))
     #Put transitions into lists
     P_transLte50 = [P_AliveLte50, P_MILte50, P_StrokeLte50, OtherDthLte50, P_FatalMILte50,
                     P_FatalStrkLte50]
@@ -238,3 +256,5 @@ def chart():
     bar_chart.render_to_file('bar_chart.svg') 
        
     return bar_chart
+
+

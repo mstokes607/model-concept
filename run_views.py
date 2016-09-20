@@ -1,6 +1,6 @@
 from flask import Flask
 app = Flask(__name__)
-app.secret_key = 'your-hard-to-guess-secret-key'
+app.secret_key = 'longliveakita'
 
 # HTML methods
 from flask import request, render_template, redirect, url_for
@@ -151,7 +151,7 @@ def submit():
                 print '> 1'
                 error = 1
             # Check for value greater 0
-            elif value <= 0 :
+            elif value < 0 : #Made change here, prev: value <= 0
                 print 'Error: < 0'
                 error = 1
         
@@ -187,4 +187,5 @@ def submit():
         
     return render_template('model.html', title = 'Model Concept', form=form, costA=costA, costB=costB, 
                                    costDiff=costDiff, qalyA=qalyA, qalyB=qalyB, qalyDiff=qalyDiff, 
-                                   ceratio=ceratio, bar=bar)                              
+                                   ceratio=ceratio, bar=bar)                                
+    
